@@ -14,8 +14,6 @@ CONFIG = load_config()
 MODEL = CONFIG['slm_config']['model_name']
 BUTTON_CHECK_INTERVAL = CONFIG['system_config']['check_interval_s']
 MAX_HISTORY = CONFIG['slm_config']['max_history_length']
-TEMP_HIGH = CONFIG['control_config']['temp_limite_alto_c']
-TEMP_LOW = CONFIG['control_config']['temp_limite_baixo_c']
 
 # Load the prompt template
 PROMPT_TEMPLATE = CONFIG['control_config']['button_control_prompt']
@@ -150,10 +148,7 @@ def interactive_mode(MODEL: str):
         if button.is_pressed and not was_pressed:
             # Rising edge (button has just been pressed)
              
-            button_prompt = PROMPT_TEMPLATE.format(
-                temp_high_c=TEMP_HIGH, 
-                temp_low_c=TEMP_LOW
-            )
+            button_prompt = PROMPT_TEMPLATE
             
             print("\n[DETECTED: BUTTON PRESSED] -> Starting automatic control mode via SLM.")
             
