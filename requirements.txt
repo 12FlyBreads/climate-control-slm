@@ -1,0 +1,17 @@
+# === requirements.txt ===
+# SLM
+ollama
+
+# Configurations Management
+PyYAML
+
+# Jupyter Notebooks
+jupyter
+jupyterlab
+notebook
+ipykernel
+
+# Hardware Control
+gpiozero                      # PINs 
+adafruit-circuitpython-dht    # DHT22 Sensor
+adafruit-circuitpython-bmp280 # BMP280 Sensor

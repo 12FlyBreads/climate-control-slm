@@ -1,0 +1,33 @@
+# === config.yaml ===
+
+# SLM CONFIGURATIONS
+slm_config:
+  # model name
+  model_name: "llama3.2:3b"
+  
+  # maximum history length (number of messages)
+  max_history_length: 8
+  
+# HARDWARE AND PIN MAPPING CONFIGURATIONS
+hardware_config:
+  dht_data_pin: 16     # DHT pin
+  button_pin: 20       # Action button pin
+  led_red_pin: 13      # Actuator 1 (Heater)
+  led_yellow_pin: 19   # Actuator 2 (Fan)
+  led_green_pin: 26    # Actuator 3 (Ideal Status)
+  
+  # BMP280 configurations
+  bmp280_i2c_address: 0x77
+  sea_level_pressure: 1013.25 # hPa
+
+# CONTROL AND RULES CONFIGURATIONS
+control_config:
+  button_control_prompt: |
+    The Quick Action Button was pressed. Read the current conditions and automatically adjust the environment:
+    if the temperature is too high (>27.0C), turn on the fan (Yellow LED);
+    if it is too low (<18.0C), turn on the heater (Red LED);
+    otherwise, keep off and turn on the Green LED to indicate ideal conditions.
+
+# SYSTEM CONFIGURATIONS
+system_config:
+  check_interval_s: 0.5 # Button check frequency in main.py
