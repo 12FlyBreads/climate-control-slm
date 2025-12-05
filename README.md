@@ -21,11 +21,11 @@ The project combines **hardware sensing**, **simulated actuators (LEDs)**, and *
 
 Sensor Data → Preprocessing → SLM Analysis → Climate Decision → Actuator Response
 
-1.Reads live environmental data using DHT22 and BMP280 sensors
-2.Processes values and forwards them to the SLM
-3.The on-device SLM analyzes the context and determines the best climate action
-4.The system activates the appropriate actuator (LEDs: cooling/heating/status)
-5.Optional: user interacts via natural language prompts 
+1. Reads live environmental data using DHT22 and BMP280 sensors
+2. Processes values and forwards them to the SLM
+3. The on-device SLM analyzes the context and determines the best climate action
+4. The system activates the appropriate actuator (LEDs: cooling/heating/status)
+5. Optional: user interacts via natural language prompts 
 
 ---
 
