@@ -1,6 +1,8 @@
 # === main.py === 
 
 # Libraries
+import sys
+import select
 import time
 import json
 import ollama
@@ -119,31 +121,25 @@ def interactive_mode(MODEL: str):
     ]
     
     # Stores the last button state to detect the falling edge (pressed -> released)
-    was_pressed = False 
+    was_pressed = False
+    print("You: ", end="", flush=True)
     
     # Dual Input Loop
     while True:
         # --- 1. Terminal Input (Non-blocking so the button can be checked) ---
-        try:
-            # Try to read terminal input
-            user_input = input("You: ").strip()
-            
+        if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
+            user_input = sys.stdin.readline().strip()
+
             if user_input.lower() in ['exit', 'quit', 'q']:
                 print("\nShutting down the system. Goodbye!")
                 break
-                
+
             if user_input:
                 messages.append({"role": "user", "content": user_input})
                 messages = handle_slm_interaction(messages)
 
-        except EOFError:
-            print("\nTerminal closed. Exiting.")
-            break
-        except KeyboardInterrupt:
-            # Exit the loop with Ctrl+C
-            print("\nInterrupted by user. Exiting.")
-            break
-        
+            print("You: ", end="", flush=True)
+
         # --- 2. Button Input (Periodic Check) ---
         if button.is_pressed and not was_pressed:
             # Rising edge (button has just been pressed)
@@ -154,6 +150,8 @@ def interactive_mode(MODEL: str):
             
             messages.append({"role": "user", "content": button_prompt})
             messages = handle_slm_interaction(messages)
+
+            print("You: ", end="", flush=True)
             
             was_pressed = True
 
