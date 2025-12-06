@@ -12,6 +12,7 @@ notebook
 ipykernel
 
 # Hardware Control
+lgpio
 gpiozero                      # PINs 
 adafruit-circuitpython-dht    # DHT22 Sensor
 adafruit-circuitpython-bmp280 # BMP280 Sensor
