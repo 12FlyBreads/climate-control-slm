@@ -23,10 +23,11 @@ hardware_config:
 # CONTROL AND RULES CONFIGURATIONS
 control_config:
   button_control_prompt: |
-    The Quick Action Button was pressed. Read the current conditions and automatically adjust the environment:
-    if the temperature is too high (>27.0C), turn on the fan (Yellow LED);
-    if it is too low (<18.0C), turn on the heater (Red LED);
-    otherwise, keep off and turn on the Green LED to indicate ideal conditions.
+    The Quick Action Button was pressed. Read the current temperature and take ONE, and only ONE, action to adjust the climate.
+    Your response MUST be one of the following three exclusive actions. ALL other devices/LEDs must be set to OFF in the same step:
+    1.  **If Temperature > 27.0C:** Turn ON the Fan (Yellow LED). Turn OFF the Heater and the Green LED.
+    2.  **If Temperature < 18.0C:** Turn ON the Heater (Red LED). Turn OFF the Fan and the Green LED.
+    3.  **If Temperature is between 18.0C and 27.0C (inclusive):** Turn ON the Green LED (Ideal). Turn OFF the Fan and the Heater.
 
 # SYSTEM CONFIGURATIONS
 system_config:
