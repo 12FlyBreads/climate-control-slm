@@ -7,7 +7,7 @@ echo "==============================================="
 # .venv name
 VENV_NAME="CLIMATECRTL"
 # model name
-MODEL_NAME="llama3.2:3b-Q4_K_M"
+MODEL_NAME="llama3.2:3b"
 
 # Ollama installation
 echo "- Installing Ollama..."
