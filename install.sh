@@ -31,7 +31,7 @@ fi
 # Update and install system dependencies
 echo "- Updating system and installing dependencies..."
 sudo apt update
-sudo apt install -y python3-pip python3-venv i2c-tools libgpiod-dev 
+sudo apt install -y python3-pip python3-venv i2c-tools libgpiod-dev liblgpio-dev
 
 # Creating virtual environment
 echo "- Creating virtual environment: $VENV_NAME"
