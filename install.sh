@@ -6,6 +6,27 @@ echo "==============================================="
 
 # .venv name
 VENV_NAME="CLIMATECRTL"
+# model name
+MODEL_NAME="llama3.2:3b-Q4_K_M"
+
+# Ollama installation
+echo "- Installing Ollama..."
+if ! command -v ollama &> /dev/null
+then
+    echo "Ollama not found. Installing Ollama..."
+    # Official Ollama installation
+    curl -fsSL https://ollama.com/install.sh | sh
+    
+    if [ $? -eq 0 ]; then
+        echo "Ollama installed successfully. Waiting for the service to start..."
+        sleep 5 
+    else
+        echo "⚠️ ERROR: Failed to install Ollama. Please check your internet connection."
+        exit 1
+    fi
+else
+    echo "Ollama is already installed."
+fi
 
 # Update and install system dependencies
 echo "- Updating system and installing dependencies..."
@@ -25,6 +46,16 @@ echo "- Installing Python libraries from requirements.txt..."
 if [ -f requirements.txt ]; then
     pip install --upgrade pip
     pip install -r requirements.txt
+
+    echo "- Downloading the quantized SLM model ($MODEL_NAME)..."
+    if command -v ollama &> /dev/null; then
+        ollama pull $MODEL_NAME
+        if [ $? -ne 0 ]; then
+            echo "⚠️ WARNING: Could not download the model $MODEL_NAME. Please ensure the Ollama service is running."
+        fi
+    else
+        echo "⚠️ WARNING: Ollama is not in the PATH. Could not automatically download the SLM model."
+    fi
     
     # Granting GPIO/I2C permissions
     echo "- Granting GPIO/I2C permissions to the current user..."
